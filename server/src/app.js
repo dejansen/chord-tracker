@@ -2,6 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
+const {sequelize} = require('./models')
+// const db = require('./db/cars')
+const config = require('./config/config')
 
 const app = express()
 
@@ -9,15 +12,14 @@ app.use(morgan('combine'))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.get('/status', (req,res) =>{
-    res.send({
-        message: "Joehoe"
-    })
-})
+require('./routes')(app)
 
-app.listen(process.env.PORT || 8081,() =>{
-    {
-        const port = process.env.PORT || 8081
-        console.log('listening on http://localhost:'+port)}
-})
+sequelize.sync()
+    .then(() => {
+        app.listen(config.port,() =>{
+            {
+                console.log(`listening on http://localhost:${config.port}`)}
+            }
+        )
+    })
 
