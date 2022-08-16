@@ -1,18 +1,18 @@
 <template>
-    <!-- <TheNavigation /> -->
-    <div class="container">
-        <router-view :key="$route.path"></router-view>
-    </div>
+  <div id="app">
+      <page-header />
+      <router-view/>
+  </div>
 </template>
 
 <script>
-// import TheNavigation from '@/components/TheNavigation.vue'
+import PageHeader from '@/components/Header.vue'
+
 
 export default {
-    components: {
-        // TheNavigation
-    }
+  name: 'App',
+  components: {
+    PageHeader,
+  }
 }
 </script>
-
-<style></style>
