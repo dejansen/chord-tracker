@@ -1,52 +1,46 @@
 <template>
-    <div class="columns mt-6">
-        <div class="column is-half  is-offset-one-quarter">
-            <div class="panel mt-6">
-                <div class="has-background-info-dark">
-                    <p class="card-header-title has-text-info-light is-size-4">Register User</p>
-                </div>
-                <div class="panel-block">
-                    <div class="container">
-                        <div class="field">
-                            <label for="email"  class="label">Email</label>
-                            <div class="control">
-                                <input 
-                                    type="email" 
-                                    name="email" 
-                                    v-model="email"
-                                    class="input"
-                                
-                                />
-
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="password"  class="label">Password</label>
-                            <div class="control">
-                                <input 
-                                    type="password" 
-                                    name="password" 
-                                    v-model="password" 
-                                    class="input"
-                                />
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div class="control">
-                                <button @click.prevent="register" class="button is-info">Register</button>
-                            </div>
-                        </div>
-                        <br>
-                        <div v-if="error" v-html="error" class="notification is-danger is-light" />
-                    </div>
-                </div>
+    <Panel title="Register">
+        <div class="field">
+            <label for="email" class="label">Email</label>
+            <div class="control">
+                <input
+                    type="email"
+                    name="email"
+                    v-model="email"
+                    class="input"
+                />
             </div>
         </div>
-    </div>
+        <div class="field">
+            <label for="password" class="label">Password</label>
+            <div class="control">
+                <input
+                    type="password"
+                    name="password"
+                    v-model="password"
+                    class="input"
+                />
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <button @click.prevent="register" class="button is-info">
+                    Register
+                </button>
+            </div>
+        </div>
+        <br />
+        <div
+            v-if="error"
+            v-html="error"
+            class="notification is-danger is-light"
+        />
+    </Panel>
 </template>
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 import { useUserStore } from '@/stores/UserStore.js'
+import Panel from '@/components/SmallPanel.vue'
 
 const UserStore = useUserStore()
 
@@ -56,7 +50,7 @@ export default {
         email: "",
         password: "",
         error: null
-       } 
+       }
     },
     methods: {
         async register() {
@@ -73,12 +67,15 @@ export default {
                 this.error = error.response.data.error
             }
         }
+    },
+    components: {
+        Panel
     }
 }
 </script>
 <style scoped>
-    .error {
-        color: red;
-        padding: 8px;
-    }
+.error {
+    color: red;
+    padding: 8px;
+}
 </style>

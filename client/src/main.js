@@ -4,9 +4,9 @@ import App from './App.vue'
 import router from './router'
 import 'bulma/css/bulma.min.css'
 
-const pinia = createPinia()
+// const pinia = createPinia()
 
-createApp(App)
+const app = createApp(App)
   .use(router)
-  .use(pinia)
+  .use(createPinia())
   .mount('#app')
